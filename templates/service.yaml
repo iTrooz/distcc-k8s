@@ -10,11 +10,11 @@ spec:
   ports:
     - name: distcc
       protocol: TCP
-      port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
-      nodePort: 32632
+      port: 3632
+      targetPort: 3632
+      nodePort: {{ .Values.service.statsPort }}
     - name: distcc-stats
       protocol: TCP
-      port: {{ .Values.service.statsPort }}
-      targetPort: {{ .Values.service.statsPort }}
-      nodePort: 32633
+      port: 3632
+      targetPort: 3632
+      nodePort: {{ .Values.service.statsPort }}

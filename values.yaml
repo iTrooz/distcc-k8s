@@ -10,5 +10,5 @@ allow:
   - 10.0.0.0/24
 
 service:
-  port: 3632
-  statsPort: 3633
+  port: 32632
+  statsPort: 32632
