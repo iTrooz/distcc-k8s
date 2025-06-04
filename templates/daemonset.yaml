@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "distcc.fullname" . }}
+  labels:
+    app: distcc
+spec:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 100%
+  selector:
+    matchLabels:
+      app: distcc
+  template:
+    metadata:
+      labels:
+        app: distcc
+    spec:
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      containers:
+      - name: distcc
+        image: "{{ .Values.image.name }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+          - >
+            distccd --stats
+            --jobs $(nproc) --log-stderr --no-detach --daemon --log-level debug
+            {{- range .Values.allow }} --allow {{ . }}{{- end }}
+        volumeMounts:
+        - mountPath: /cache
+          name: cache-volume
+      volumes:
+      - name: cache-volume
+        emptyDir: {}

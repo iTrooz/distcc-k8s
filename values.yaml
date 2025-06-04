@@ -1,0 +1,14 @@
+image:
+  name: ghcr.io/itrooz/distcc:archlinux
+  pullPolicy: Always
+
+nodeSelector:
+  distcc: "true"
+
+externalTrafficPolicy: Local
+allow:
+  - 10.0.0.0/24
+
+service:
+  port: 3632
+  statsPort: 3633

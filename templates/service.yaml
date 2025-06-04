@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "distcc.fullname" . }}
+spec:
+  externalTrafficPolicy: {{ .Values.externalTrafficPolicy }}
+  selector:
+    app: distcc
+  type: NodePort
+  ports:
+    - name: distcc
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      nodePort: 32632
+    - name: distcc-stats
+      protocol: TCP
+      port: {{ .Values.service.statsPort }}
+      targetPort: {{ .Values.service.statsPort }}
+      nodePort: 32633
