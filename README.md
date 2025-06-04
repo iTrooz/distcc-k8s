@@ -10,3 +10,6 @@ Note: the image should use the distribution that the build environement will use
 - create `values.local.yaml` and 
 - `helm upgrade -i --create-namespace -n distcc -i distcc-archlinux -f values.local.yaml ./`
 - Add `DISTCC_HOSTS` environement variable to your build environment, with every k8s node that you labelled. (e.g. `DISTCC_HOSTS=your_node1:32632,your_node2:32632`)
+
+# Credits
+https://github.com/cinaq/distcc-docker for inspiration
